@@ -44,7 +44,8 @@ GET
 /random - Random dinosaur<br>
 /dino/:name - Get dinosaur by name<br>
 /search - Search by query matching data<br>
-/fact - Random dinosaur fact
+/fact - Random dinosaur fact<br>
+/trivia - Get a dinosaur trivia question
 </div>
 
 
@@ -81,6 +82,19 @@ For /fact<br>
 <pre>
   <div class="code">
 "string"
+  </div>
+</pre>
+</div>
+  <div class="section">
+For /trivia<br>
+<pre>
+  <div class="code">
+{
+  "question": "string",
+  "correct": "string",
+  "incorrrect": ["array of strings"],
+  "difficulty": number
+}
   </div>
 </pre>
 </div>
@@ -128,6 +142,15 @@ For /fact<br>
   <h4>Result:</h4>
   <pre>
     <div class="code" id="fact-example"></div>
+  </pre>
+  <h4>/trivia</h4>
+  <form action="/trivia-example" method="POST">
+  <label>/trivia</label>
+  <input type="submit" value="Try!" class="try">
+  </form>
+  <h4>Result:</h4>
+  <pre>
+    <div class="code" id="trivia-example"></div>
   </pre>
 </div>
 
