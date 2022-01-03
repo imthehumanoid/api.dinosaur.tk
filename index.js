@@ -117,7 +117,7 @@ app.post('/search-example', async (req, res) => {
 
 app.post('/trivia-example', (req, res) => {
   let rand = Math.floor(Math.random() * trivia.length);
-  res.sendFile(__dirname + 'index.html', {
+  res.sendFile(__dirname + '/index.html', {
     headers: {
       trivia: trivia[rand]
     }
