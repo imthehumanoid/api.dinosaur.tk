@@ -97,13 +97,16 @@ app.post('/dino-example', async (req, res) => {
 });
 
 app.post('/search-example', async (req, res) => {
-  let rand = Math.floor(Math.random() * dinos.length);
-  let data = await encodeURIComponent(JSON.stringify([dinos[rand]]));
-  res.sendFile(__dirname + '/index.html', {
-    headers: {
-      random: data
-    }
-  });
+  try {
+    let searchRes = srch(req.query);
+    res.sendFile(__dirname + '/index.html', {
+      headers: {
+        search: searchRes
+      }
+    });
+  } catch (err) {
+    res.sendStatus(404);
+  }
 });
 
 app.listen(3000);
