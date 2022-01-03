@@ -107,7 +107,7 @@ app.post('/search-example', async (req, res) => {
     let searchRes = srch(req.body.query);
     res.sendFile(__dirname + '/index.html', {
       headers: {
-        search: searchRes
+        search: encodeURIComponent(JSON.stringify(searchRes))
       }
     });
   } catch (err) {
@@ -119,7 +119,7 @@ app.post('/trivia-example', (req, res) => {
   let rand = Math.floor(Math.random() * trivia.length);
   res.sendFile(__dirname + '/index.html', {
     headers: {
-      trivia: trivia[rand]
+      trivia:  encodeURIComponent(JSON.stringify(trivia[rand]))
     }
   });
 });
