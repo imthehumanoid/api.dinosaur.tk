@@ -1,0 +1,171 @@
+<head>
+<meta property="og:title" content="Dinosaur Information API"/>
+<meta property="og:site_name" content="api.dinosaur.tk"/>
+<meta property="og:description" content="A dinosaur information GET api!"/>
+<meta property="theme-color" content="#964B00"/>
+</head>
+<style>
+  body {
+    background-color: #964B00;
+  }
+  .section {
+    background-color: gray;
+    border-radius: 8%;
+    padding: 10px;
+  }
+  .code {
+    background-color: black;
+    color: green;
+    padding: 20px;
+    border-radius: 2%;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .param {
+    width: 60px;
+    background-color: black;
+    color: green;
+  }
+  .try {
+    background-color: brown;
+    color: white;
+    border-radius: 20%;
+  }
+  </style>
+<body>
+<h3>Method:</h3>
+<div class="section">
+GET
+</div>
+
+<h3>Paths:</h3>
+<div class="section">
+/random - Random dinosaur<br>
+/dino/:name - Get dinosaur by name<br>
+/search - Search by query matching data<br>
+/fact - Random dinosaur fact
+</div>
+
+
+<h3>Response Scheme:</h3>
+<div class="section">
+For /random, /dino, and /search<br>
+<pre>
+  <div class="code">
+[{
+  "name": "string"
+  "pronunciation": "string",
+  "meaning": "string",
+  "named_by": "string",
+  "description": "string",
+  "type": "string",
+  "species_type": "string",
+  "diet": "string",
+  "era": "string",
+  "found": "string",
+  "avg_weight_kg": number,
+  "avg_length_m": number,
+  "movement": "string",
+  "taxonomy": ["array of strings"],
+  "images": {
+    "drawing": "url string",
+    "silhouette": "url string"
+  }
+}]
+  </div>
+</pre>
+</div>
+<div class="section">
+For /fact<br>
+<pre>
+  <div class="code">
+"string"
+  </div>
+</pre>
+</div>
+
+<h3>Examples:</h3>
+<div class="section">
+  <h4>/random</h4>
+  <form action="/random-example" method="POST">
+  <label>/random</label>
+  <input type="submit" value="Try!" class="try">
+  </form>
+  <h4>Result:</h4>
+  <pre>
+    <div class="code" id="random-example"></div>
+  </pre>
+    <h4>/dino</h4>
+  <form action="/dino-example" method="POST">
+  <label for="dino" id="dino">/dino/</label>
+  <input type="text" id="dino" name="name" class="param">
+  <input type="submit" value="Try!" class="try">
+  </form>
+  <h4>Result:</h4>
+  <pre>
+    <div class="code" id="dino-example"></div>
+  </pre>
+  <h4>/search</h4>
+  <form action="/search-example">
+  <label for="param1">/search?name=</label>
+  <input type="text" id="param1" name="param1" class="param">
+  <label for="param2">&</label>
+  <input type="text" id="param2" name="param2" class="param">
+  <label for="param3">&</label>
+  <input type="text" id="param3" name="param3" class="param">
+  <input type="submit" value="Try!" class="try">
+  </form>
+  <h4>Result:</h4>
+  <pre>
+    <div class="code" id="search-example"></div>
+  </pre>
+  <h4>/fact</h4>
+  <form action="/fact-example">
+  <label>/random</label>
+  <input type="submit" value="Try!" class="try">
+  </form>
+  <h4>Result:</h4>
+  <pre>
+    <div class="code" id="fact-example"></div>
+  </pre>
+</div>
+
+  <script>
+function parseHttpHeaders(httpHeaders) {
+    return httpHeaders.split("\n")
+     .map(x=>x.split(/: */,2))
+     .filter(x=>x[0])
+     .reduce((ac, x)=>{ac[x[0]] = x[1];return ac;}, {});
+}
+
+var req = new XMLHttpRequest();
+req.open('POST', document.location, false);
+req.send(null);
+var headers = parseHttpHeaders(req.getAllResponseHeaders());
+if (headers.random) {
+  document.getElementById('random-example').innerHTML = decodeURIComponent(headers.random);
+  location.href = "#random-example";
+};
+if (headers.dino) {
+  document.getElementById('dino-example').innerHTML = decodeURIComponent(headers.dino);
+  location.href = "#dino-example";
+};
+if (headers.search) {
+  document.getElementById('search-example').innerHTML = decodeURIComponent(headers.search);
+  location.href = "#search-example";
+};
+if (headers.fact) {
+  document.getElementById('fact-example').innerHTML = decodeURIComponent(headers.fact);
+  location.href = "#fact-example";
+};
+  </script>
+
+<h3>Credits:</h3>
+<div class="section">
+Information provided by <a href="https://www.nhm.ac.uk/discover/dino-directory/">www.nhm.ac.uk</a><br>
+Facts provided by <a href="https://www.factretriever.com/dinosaur-facts">www.factretriever.com</a><br>
+Project started by <a href="https://github.com/rakhadjo/tyrannosaurus.rest/">rakhadjo</a><br>
+Project finished and site made by <a href="https://im.thehumanoid.cf/">imthehumanoid</a>
+</div>
+</body>
