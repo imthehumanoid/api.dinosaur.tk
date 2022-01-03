@@ -111,7 +111,11 @@ app.post('/search-example', async (req, res) => {
       }
     });
   } catch (err) {
-    res.sendStatus(404);
+  res.sendFile(__dirname + '/index.html', {
+    headers: {
+      search: 'Not Found'
+    }
+  });
   }
 });
 
