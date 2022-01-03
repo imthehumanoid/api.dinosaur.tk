@@ -4,6 +4,7 @@ const axios = require('axios');
 const app = express();
 const dinos = require('./dinosaurs');
 const facts = require('./facts');
+const trivia = require('./trivia');
 const bodyParser = require('body-parser');
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -54,6 +55,11 @@ app.get('/fact', (req, res) => {
   res.json(facts[rand]);
 });
 
+app.get('/trivia', (req, res) => {
+  let rand = Math.floor(Math.random() * trivia.length);
+  res.json(trivia[rand]);
+});
+
 // Examples
 
 app.post('/random-example', async (req, res) => {
@@ -98,7 +104,7 @@ app.post('/dino-example', async (req, res) => {
 
 app.post('/search-example', async (req, res) => {
   try {
-    let searchRes = srch(req.query);
+    let searchRes = srch(req.body.query);
     res.sendFile(__dirname + '/index.html', {
       headers: {
         search: searchRes
@@ -107,6 +113,15 @@ app.post('/search-example', async (req, res) => {
   } catch (err) {
     res.sendStatus(404);
   }
+});
+
+app.post('/trivia-example', (req, res) => {
+  let rand = Math.floor(Math.random() * trivia.length);
+  res.sendFile(__dirname + 'index.html', {
+    headers: {
+      trivia: trivia[rand]
+    }
+  });
 });
 
 app.listen(3000);
